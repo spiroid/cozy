@@ -1,0 +1,18 @@
+[submodule "images/cozy-nginx"]
+    path = images/cozy-nginx
+    url = git@github.com:spiroid/cozy-nginx.git
+[submodule "images/cozy-controller"]
+	path = images/cozy-controller
+	url = git@github.com:spiroid/cozy-controller.git
+[submodule "images/cozy-couchdb"]
+	path = images/cozy-couchdb
+	url = git@github.com:spiroid/cozy-couchdb.git
+[submodule "images/cozy-conf"]
+	path = images/cozy-conf
+	url = git@github.com:spiroid/cozy-conf.git
+[submodule "images/cozy-couchdb-data"]
+	path = images/cozy-couchdb-data
+	url = git@github.com:spiroid/cozy-couchdb-data.git
+[submodule "images/cozy-indexer-data"]
+	path = images/cozy-indexer-data
+	url = git@github.com:spiroid/cozy-indexer-data.git
