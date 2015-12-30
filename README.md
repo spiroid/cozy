@@ -9,3 +9,21 @@ That's why i started working on a more modular, decoupled approach with one proc
 
 This repository was created to centralize the work done on all the cozy docker images, as there is one github repository per image, and to bring together the documentation and docker-compose examples. Thanks to @woshilapin and @patcito for the idea  :)
 
+
+## Quickstart
+
+```
+git clone git@github.com:spiroid/cozy.git
+docker-compose up -d
+```
+
+## Initialization
+
+When the container is running and your cozy cloud instance is not yet initialized, there is an init script to launch.
+Given that your controller container name is cozy_controller_1 (docker-compose default) :
+
+```
+docker exec -it cozy_controller_1 cozy-init.sh
+```
+
+This installs the Home, Data-System and proxy applications, and could take a few minutes. Please be patient.
