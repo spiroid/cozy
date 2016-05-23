@@ -1,35 +1,44 @@
-configuration:
-    container_name: configuration
-    image: spiroid/cozy-conf
+version: '2'
 
-couchdata:
-    container_name: couchdata
-    image: spiroid/cozy-couchdb-data
+services:
+    configuration:
+        container_name: configuration
+        image: spiroid/cozy-conf
+        build: ./images/cozy-conf
 
-indexerdata:
-    container_name: indexerdata
-    image: spiroid/cozy-indexer-data
+    couchdata:
+        container_name: couchdata
+        image: spiroid/cozy-couchdb-data
+        build: ./images/cozy-couchdb-data
 
-couchdb:
-    image: spiroid/cozy-couchdb
-    restart: always
-    volumes_from:
-        - couchdata
-        - configuration
+    indexerdata:
+        container_name: indexerdata
+        image: spiroid/cozy-indexer-data
+        build: ./images/cozy-indexer-data
 
-controller:
-    image: spiroid/cozy-controller
-    restart: always
-    links:
-        - couchdb
-    volumes_from:
-        - configuration
-        - indexerdata
+    couchdb:
+        image: spiroid/cozy-couchdb
+        build: ./images/cozy-couchdb
+        restart: always
+        volumes_from:
+            - couchdata
+            - configuration
 
-nginx:
-    image: spiroid/cozy-nginx
-    restart: always
-    links:
-        - controller
-    ports:
-        - "443:443"
+    controller:
+        image: spiroid/cozy-controller
+        build: ./images/cozy-controller
+        restart: always
+        links:
+            - couchdb
+        volumes_from:
+            - configuration
+            - indexerdata
+
+    nginx:
+        image: spiroid/cozy-nginx
+        build: ./images/cozy-nginx
+        restart: always
+        links:
+            - controller
+        ports:
+            - "443:443"
