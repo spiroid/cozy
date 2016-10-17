@@ -1,44 +1,34 @@
 version: '2'
 
-services:
-    configuration:
-        container_name: configuration
-        image: spiroid/cozy-conf
-        build: ./images/cozy-conf
-
+volumes:
     couchdata:
-        container_name: couchdata
-        image: spiroid/cozy-couchdb-data
-        build: ./images/cozy-couchdb-data
-
+        driver: local
     indexerdata:
-        container_name: indexerdata
-        image: spiroid/cozy-indexer-data
-        build: ./images/cozy-indexer-data
+        driver: local
 
+services:
     couchdb:
-        image: spiroid/cozy-couchdb
-        build: ./images/cozy-couchdb
+        image: klaemo/couchdb:1.6.1
         restart: always
-        volumes_from:
-            - couchdata
-            - configuration
+        volumes:
+            - couchdata:/usr/local/var/lib/couchdb
+        environment:
+            - COUCHDB_USER
+            - COUCHDB_PASSWORD
 
     controller:
         image: spiroid/cozy-controller
         build: ./images/cozy-controller
         restart: always
-        links:
-            - couchdb
-        volumes_from:
-            - configuration
-            - indexerdata
+        volumes:
+            - indexerdata:/usr/local/var/cozy/data-system/indexes
+        environment:
+            - COUCHDB_USER
+            - COUCHDB_PASSWORD
 
     nginx:
         image: spiroid/cozy-nginx
         build: ./images/cozy-nginx
         restart: always
-        links:
-            - controller
         ports:
             - "443:443"
