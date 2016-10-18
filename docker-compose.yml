@@ -17,7 +17,7 @@ services:
             - COUCHDB_PASSWORD
 
     controller:
-        image: spiroid/cozy-controller
+        image: spiroid/cozy-controller:refactor-v2
         build: ./images/cozy-controller
         restart: always
         volumes:
