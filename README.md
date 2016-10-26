@@ -14,7 +14,11 @@ That's why i started working on a more modular, decoupled approach with one proc
 
 This repository was created to centralize the work done on all the cozy docker images, as there is one github repository per image, and to bring together the documentation and docker-compose examples. Thanks to @woshilapin and @patcito for the idea  :)
 
+## Requirements
 
+ * [docker](https://www.docker.com/) version 1.10+
+ * [docker-compose](https://docker.github.io/compose/overview/) version 1.6.0+
+ 
 ## Quickstart
 
 ```
